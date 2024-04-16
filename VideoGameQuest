@@ -1,0 +1,91 @@
+namespace POO___Les_classes
+{
+    internal class Program
+    {
+
+        public class Character
+        {
+            public string nom = "";
+            public int pointsDeVie = 0;
+            public int forceAttaque = 0;
+            public int forceDefense = 0;
+
+            public void Attack(Character personnageCible)    
+            {
+                int pointsDeVieARetire = this.forceAttaque - personnageCible.forceDefense;
+
+                personnageCible.pointsDeVie -= pointsDeVieARetire; 
+
+
+                Console.WriteLine($"points de vie restants de {personnageCible.nom} : {personnageCible.pointsDeVie}");  
+                
+            }
+
+            public bool IsAlive()  
+            {
+
+                if (this.pointsDeVie <= 0)
+                {
+                    bool isAlive = false;  
+                    
+                    return isAlive; 
+                }
+                else
+                {
+                    bool isAlive = true ;
+                    return isAlive;
+                }
+                
+            }
+
+        }
+
+        static void Main(string[] args)
+        {
+            // Instanciation des personnages 
+
+            Character personnage1 = new Character();
+            Character personnage2 = new Character(); 
+
+            personnage1.nom = "Marc"; 
+            personnage1.pointsDeVie = 50; 
+            personnage1.forceAttaque = 15; 
+            personnage1.forceDefense= 10;
+
+            personnage2.nom = "Anna";
+            personnage2.pointsDeVie = 50;
+            personnage2.forceAttaque = 25; 
+            personnage2.forceDefense = 14;   
+
+
+            // Démarrage du combat 
+
+            while(personnage1.pointsDeVie > 0 && personnage2.pointsDeVie > 0)
+            {
+                personnage1.Attack(personnage2);
+                personnage2.Attack(personnage1);  
+                
+                if (personnage1.pointsDeVie <= 0 || personnage1.pointsDeVie <= 0)
+                {
+                    break; 
+                }  
+            }
+
+            // Récupèrer l'etat d'un des 2 personnages pour déterminer le gagnant
+
+            bool etatFinCombatPersonnage1 = personnage1.IsAlive(); 
+
+            if (etatFinCombatPersonnage1 == false) 
+            {
+                Console.WriteLine();
+                Console.WriteLine($"{personnage1.nom} est mort. Le gagnant est {personnage2.nom}"); 
+            }
+            else 
+            {
+                Console.WriteLine();
+                Console.WriteLine($"{personnage2.nom} est morte. Le gagnant est {personnage1.nom}");   
+            } 
+
+        } 
+    }
+}
